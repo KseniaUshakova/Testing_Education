@@ -1,3 +1,3 @@
 apply plugin: 'java'
 apply plugin: 'application'
-mainClassName= 'myfirstj'
+mainClassName= 'ru.testing_education.sandbox.MyFirstProgram'
