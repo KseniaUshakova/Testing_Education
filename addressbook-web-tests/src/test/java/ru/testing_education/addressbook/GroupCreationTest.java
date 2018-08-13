@@ -32,7 +32,7 @@ public class GroupCreationTest {
   }
 
   @Test
-  public void test1GroupCreation() {
+  public void testGroupCreation() {
     gotoGrouppage("groups");
     initGroupCreation("new");
     fillGroupForm(new GroupData("Group1", "test_2", "test2"));
