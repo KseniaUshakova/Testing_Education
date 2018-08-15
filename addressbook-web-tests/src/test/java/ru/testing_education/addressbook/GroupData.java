@@ -1,25 +1,25 @@
 package ru.testing_education.addressbook;
 
 public class GroupData {
-  private final String group_name;
-  private final String group_header;
-  private final String group_footer;
+  private final String groupName;
+  private final String groupHeader;
+  private final String groupFooter;
 
-  public GroupData(String group_name, String group_header, String group_footer) {
-    this.group_name = group_name;
-    this.group_header = group_header;
-    this.group_footer = group_footer;
+  public GroupData(String groupName, String groupHeader, String groupFooter) {
+    this.groupName = groupName;
+    this.groupHeader = groupHeader;
+    this.groupFooter = groupFooter;
   }
 
-  public String getGroup_name() {
-    return group_name;
+  public String getGroupName() {
+    return groupName;
   }
 
-  public String getGroup_header() {
-    return group_header;
+  public String getGroupHeader() {
+    return groupHeader;
   }
 
-  public String getGroup_footer() {
-    return group_footer;
+  public String getGroupFooter() {
+    return groupFooter;
   }
 }
