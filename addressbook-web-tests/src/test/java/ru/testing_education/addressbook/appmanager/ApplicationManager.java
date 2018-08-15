@@ -1,15 +1,14 @@
-package ru.testing_education.addressbook;
+package ru.testing_education.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import ru.testing_education.addressbook.model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 
-public class TestBase {
+public class ApplicationManager {
   FirefoxDriver wd;
 
   public static boolean isAlertPresent(FirefoxDriver wd) {
@@ -21,8 +20,7 @@ public class TestBase {
     }
   }
 
-  @BeforeMethod
-  public void setUp() throws Exception {
+  public void init() {
     wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/group.php");
@@ -39,15 +37,15 @@ public class TestBase {
     wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
   }
 
-  protected void returntoGroupPage(String s) {
+  public void returntoGroupPage(String s) {
     wd.findElement(By.linkText(s)).click();
   }
 
-  protected void subminGroupCretaion(String submit) {
+  public void subminGroupCretaion(String submit) {
     wd.findElement(By.name(submit)).click();
   }
 
-  protected void fillGroupForm(GroupData groupData) {
+  public void fillGroupForm(GroupData groupData) {
     wd.findElement(By.name("group_name")).click();
     wd.findElement(By.name("group_name")).clear();
     wd.findElement(By.name("group_name")).sendKeys(groupData.getGroupName());
@@ -59,24 +57,23 @@ public class TestBase {
     wd.findElement(By.name("group_footer")).sendKeys(groupData.getGroupFooter());
   }
 
-  protected void initGroupCreation(String s) {
+  public void initGroupCreation(String s) {
     wd.findElement(By.name(s)).click();
   }
 
-  protected void gotoGrouppage(String groups) {
+  public void gotoGrouppage(String groups) {
     wd.findElement(By.linkText(groups)).click();
   }
 
-  @AfterMethod
-  public void tearDown() {
+  public void stop() {
     wd.quit();
   }
 
-  protected void deleteSelectedGroup() {
+  public void deleteSelectedGroup() {
     wd.findElement(By.name("delete")).click();
   }
 
-  protected void selectGroup() {
+  public void selectGroup() {
     wd.findElement(By.name("selected[]")).click();
   }
 }
