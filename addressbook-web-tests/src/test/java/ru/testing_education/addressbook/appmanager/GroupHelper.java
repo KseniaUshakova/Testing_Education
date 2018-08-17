@@ -1,6 +1,5 @@
 package ru.testing_education.addressbook.appmanager;
 
-import com.sun.javafx.binding.ExpressionHelperBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.testing_education.addressbook.model.GroupData;
@@ -11,8 +10,7 @@ public class GroupHelper extends HelperBase {
     super(wd);
   }
 
-  public void returntoGroupPage(String s) {
-    click(By.linkText(s));
+  public void returntoGroupPage(String groups) { click(By.linkText (groups));
   }
 
   public void submitGroupCreation(String submit) {
@@ -25,8 +23,8 @@ public class GroupHelper extends HelperBase {
     type(By.name("group_footer"), groupData.getGroupFooter());
   }
 
-  public void initGroupCreation(String s) {
-    click(By.name(s));
+  public void initGroupCreation() {
+    click(By.name("new"));
   }
 
   public void deleteSelectedGroup() {
@@ -36,4 +34,8 @@ public class GroupHelper extends HelperBase {
   public void selectGroup() {
     click(By.name("selected[]"));
   }
+
+  public void initGroupModifictation() { click(By.name("edit")); }
+
+  public void submitModificaction() { click (By.name("update")); }
 }

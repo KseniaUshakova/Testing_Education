@@ -26,6 +26,29 @@ public class ContactHelper extends HelperBase{
   }
 
   public void initContactCreation(String s) {
+
     click(By.linkText(s));
+  }
+
+  public void selectAllContacts() {
+    click(By.id("MassCB"));
+  }
+
+  public void deleteContact() {
+    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    acceptYes();
+  }
+
+
+  public void initEditContact() {
+    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  }
+
+  public void acceptUpdateContact() {
+    click(By.name("update"));
+  }
+
+  public void selectOneContact() {
+    click(By.id ("23"));
   }
 }
