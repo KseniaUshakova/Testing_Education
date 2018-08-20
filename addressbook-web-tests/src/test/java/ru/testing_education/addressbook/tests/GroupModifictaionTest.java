@@ -10,8 +10,9 @@ public class GroupModifictaionTest extends TestBase {
   public void testGroupModification() {
 
     app.getNavigationHelper().goToGroupPage("groups");
+    app.getGroupHelper().selectGroup();
     app.getGroupHelper().initGroupModifictation();
-    app.getGroupHelper().fillGroupForm(new GroupData("_Group100", "test_2", "test2"));
+    app.getGroupHelper().fillGroupForm(new GroupData("Chrome_gr1", "CHROME_TEST", "test2"));
     app.getGroupHelper().submitModificaction();
     app.getGroupHelper().returntoGroupPage("group page");
 

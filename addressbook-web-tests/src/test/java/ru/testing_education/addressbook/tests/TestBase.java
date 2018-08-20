@@ -1,6 +1,7 @@
 package ru.testing_education.addressbook.tests;
 
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterMethod;
@@ -13,7 +14,7 @@ public class TestBase {
   protected final MyApplicationManager applicationManager = new MyApplicationManager();
   FirefoxDriver wd;
 
-  public static boolean isAlertPresent(FirefoxDriver wd) {
+  public static boolean isAlertPresent(WebDriver wd) {
     try {
       wd.switchTo().alert();
       return true;
