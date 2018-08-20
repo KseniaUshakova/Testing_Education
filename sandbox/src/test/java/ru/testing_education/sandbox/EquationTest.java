@@ -26,5 +26,28 @@ public class EquationTest {
     Assert.assertEquals(e.rootNumber(),2);
   }
 
+  @Test
+  public void testLine() {
+    Equation e = new Equation(0, 6, 1);
+
+    Assert.assertEquals(e.rootNumber(),1);
+  }
+
+  @Test
+  public void testZero() {
+    Equation e = new Equation(0, 0, 1);
+
+    Assert.assertEquals(e.rootNumber(),0);
+  }
+
+  @Test
+  public void testEmpty() {
+    Equation e = new Equation(0, 0, 0);
+
+    Assert.assertEquals(e.rootNumber(),-1);
+  }
+
+
+
 
 }
