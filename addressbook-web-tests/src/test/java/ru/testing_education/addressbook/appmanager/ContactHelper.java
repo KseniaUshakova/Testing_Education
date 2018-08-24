@@ -2,6 +2,8 @@ package ru.testing_education.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.testing_education.addressbook.model.ContactInfo;
 
 public class ContactHelper extends HelperBase {
@@ -16,7 +18,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void fillContactDetails(ContactInfo contactInfo) {
+  public void fillContactDetails(ContactInfo contactInfo, boolean creation) {
 
     type(By.name("firstname"), contactInfo.getFirstName());
     type(By.name("middlename"), contactInfo.getMiddleName());
@@ -25,7 +27,14 @@ public class ContactHelper extends HelperBase {
     type(By.name("home"), contactInfo.getHomePhone());
     type(By.name("email"), contactInfo.getEmail1());
     type(By.name("email2"), contactInfo.getEmail2());
+
+    if (creation) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactInfo.getGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
+
 
   public void initContactCreation(String s) {
 
@@ -55,4 +64,6 @@ public class ContactHelper extends HelperBase {
 
     click(By.name("update"));
   }
+
+
 }

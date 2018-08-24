@@ -1,19 +1,13 @@
 package ru.testing_education.addressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
-import ru.testing_education.addressbook.model.ContactInfo;
-
 
 import java.util.concurrent.TimeUnit;
-
-import static org.openqa.selenium.remote.BrowserType.IE;
 
 public class ApplicationManager {
 
@@ -47,7 +41,7 @@ public class ApplicationManager {
       wd = new InternetExplorerDriver();
     }
 
-    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/group.php");
 
     contactHelper = new ContactHelper(wd);

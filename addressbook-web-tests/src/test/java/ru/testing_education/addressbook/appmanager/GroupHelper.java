@@ -2,7 +2,6 @@ package ru.testing_education.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.testing_education.addressbook.model.GroupData;
 
 public class GroupHelper extends HelperBase {
