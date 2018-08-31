@@ -23,7 +23,12 @@ public class GroupCreationTest extends TestBase {
 
     group.setGroupId(after.stream().max((o1, o2) -> Integer.compare(o1.getGroupId(), o2.getGroupId())).get().getGroupId());
     before.add(group);
-    Assert.assertEquals(new HashSet<Object>(before),new HashSet<java.lang.Object>(after));
+
+    Comparator<? super GroupData> byId = ((g1, g2) -> Integer.compare(g1.getGroupId(),g2.getGroupId()));
+
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before,after);
 
 
   }
