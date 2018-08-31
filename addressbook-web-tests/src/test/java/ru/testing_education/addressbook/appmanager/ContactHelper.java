@@ -2,9 +2,13 @@ package ru.testing_education.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.testing_education.addressbook.model.ContactInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -42,8 +46,9 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public void selectContact() {
-    click(By.name("selected[]"));
+  public void selectContact(int index) {
+
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
 
@@ -75,5 +80,28 @@ public class ContactHelper extends HelperBase {
 
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
+  }
+
+  public int getContactCount() {
+
+    return wd.findElements(By.name("selected[]")).size();
+  }
+
+  public List<ContactInfo> getContactList() {
+    List<ContactInfo> contacts = new ArrayList<>();
+    List<WebElement> elements = wd.findElements(By.name("entry"));
+
+    for (WebElement element : elements) {
+
+      String secondName = element.getText();
+      String firstName = element.getText();
+
+      ContactInfo contact = new ContactInfo(firstName, null, secondName, null, null, null, null, null);
+
+      contacts.add(contact);
+    }
+
+
+    return contacts;
   }
 }
