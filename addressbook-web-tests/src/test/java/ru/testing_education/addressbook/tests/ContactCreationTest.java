@@ -17,7 +17,7 @@ public class ContactCreationTest extends TestBase {
     List<ContactInfo> before = app.getContactHelper().getContactList();
 
 
-    app.getContactHelper().createNewContact(new ContactInfo("Vasy", "Vladimirovna", "Petrov", "Spb", "111-11-11", "test@inbox.ru", "test2@mail.ru", "test_group"), true);
+    app.getContactHelper().createNewContact(new ContactInfo("Nata", "Petrovna", "Smirniva", "Spb", "111-11-11", "test@inbox.ru", "test2@mail.ru", "test_group"), true);
     app.getNavigationHelper().goToHomePage("home");
 
 

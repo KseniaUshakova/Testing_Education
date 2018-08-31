@@ -1,5 +1,7 @@
 package ru.testing_education.addressbook.model;
 
+import java.util.Objects;
+
 public class ContactInfo {
   private final String firstName;
   private final String middleName;
@@ -19,6 +21,29 @@ public class ContactInfo {
     this.email1 = email1;
     this.email2 = email2;
     this.group = group;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactInfo that = (ContactInfo) o;
+    return Objects.equals(firstName, that.firstName) &&
+            Objects.equals(secondName, that.secondName);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(firstName, secondName);
+  }
+
+  @Override
+  public String toString() {
+    return "ContactInfo{" +
+            "firstName='" + firstName + '\'' +
+            ", secondName='" + secondName + '\'' +
+            '}';
   }
 
   public String getFirstName() {
