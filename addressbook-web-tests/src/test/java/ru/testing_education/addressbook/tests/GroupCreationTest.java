@@ -26,7 +26,6 @@ public class GroupCreationTest extends TestBase {
     Assert.assertEquals(new HashSet<Object>(before),new HashSet<java.lang.Object>(after));
 
 
-
   }
 
 }
