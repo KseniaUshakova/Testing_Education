@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import ru.testing_education.addressbook.model.ContactInfo;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTest extends TestBase {
@@ -22,13 +21,12 @@ public class ContactCreationTest extends TestBase {
     app.getContactHelper().createNewContact(newContact, true);
     app.getNavigationHelper().goToHomePage("home");
     List<ContactInfo> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(after.size(), before.size()+1);
-
+    Assert.assertEquals(after.size(), before.size() + 1);
 
     newContact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
     before.add(newContact);
 
-    Comparator<? super ContactInfo> byId = (c1,c2)-> (Integer.compare(c1.getId(), c2.getId()));
+    Comparator<? super ContactInfo> byId = (c1, c2) -> (Integer.compare(c1.getId(), c2.getId()));
 
     before.sort(byId);
     after.sort(byId);
@@ -36,7 +34,7 @@ public class ContactCreationTest extends TestBase {
 
 
   }
-  }
+}
 
 
 

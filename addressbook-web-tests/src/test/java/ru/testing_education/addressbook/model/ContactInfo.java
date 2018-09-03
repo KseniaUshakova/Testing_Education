@@ -50,7 +50,7 @@ public class ContactInfo {
     this.group = group;
   }
 
-  public ContactInfo( String firstName, String middleName, String secondName, String address, String homePhone, String email1, String email2, String group) {
+  public ContactInfo(String firstName, String middleName, String secondName, String address, String homePhone, String email1, String email2, String group) {
     this.id = 0;
     this.firstName = firstName;
     this.middleName = middleName;
@@ -94,7 +94,9 @@ public class ContactInfo {
     return email2;
   }
 
-  public String getGroup() { return group; }
+  public String getGroup() {
+    return group;
+  }
 
   public void setId(int id) {
     this.id = id;

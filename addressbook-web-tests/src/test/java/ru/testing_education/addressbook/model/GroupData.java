@@ -26,7 +26,9 @@ public class GroupData {
     this.groupId = groupId;
   }
 
-  public int getGroupId() { return groupId; }
+  public int getGroupId() {
+    return groupId;
+  }
 
   public String getGroupName() {
     return groupName;

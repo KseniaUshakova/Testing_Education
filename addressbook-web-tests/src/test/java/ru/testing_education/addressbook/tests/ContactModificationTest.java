@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import ru.testing_education.addressbook.model.ContactInfo;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTest extends TestBase {
