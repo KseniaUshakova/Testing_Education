@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.testing_education.addressbook.model.ContactInfo;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -20,11 +21,10 @@ public class ContactModificationTest extends TestBase {
     app.getNavigationHelper().goToHomePage("home");
     List<ContactInfo> before = app.getContactHelper().getContactList();
 
-
     app.getContactHelper().selectContact(before.size()-1);
-    app.getContactHelper().initEditContact();
+    app.getContactHelper().initEditContact(before.size()+1);
     ContactInfo newcontact = new ContactInfo(before.get(before.size()-1).getId(),
-            "NewOne", "Vladimirovna", "Ushakova",
+            "A", "Vladimirovna", "Modify",
             "Spb", "111-11-11", "test@inbox.ru",
             "test2@mail.ru", null);
     app.getContactHelper().fillContactDetails(newcontact, false);
@@ -35,7 +35,12 @@ public class ContactModificationTest extends TestBase {
 
     before.remove(before.size()-1);
     before.add(newcontact);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
+    Comparator<? super ContactInfo> byId = (c1,c2)-> (Integer.compare(c1.getId(), c2.getId()));
+    before.sort(byId);
+    after.sort(byId);
+
+    Assert.assertEquals(before,after);
 
   }
 
