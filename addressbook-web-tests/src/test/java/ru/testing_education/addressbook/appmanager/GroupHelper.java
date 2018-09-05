@@ -44,7 +44,7 @@ public class GroupHelper extends HelperBase {
   public void returntoGroupPage(String groups) { click(By.linkText (groups)); }
 
 
-  public void createGroup(GroupData group) {
+  public void create(GroupData group) {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation("submit");
@@ -52,7 +52,7 @@ public class GroupHelper extends HelperBase {
 
   }
 
-  public void modifyGroup (int index, GroupData group) {
+  public void modify(int index, GroupData group) {
     selectGroup(index);
     initGroupModifictation();
     fillGroupForm(group);
@@ -60,16 +60,19 @@ public class GroupHelper extends HelperBase {
     returntoGroupPage("group page");
   }
 
+  public void delete(int index) {
+    selectGroup(index);
+    deleteSelectedGroup();
+    returntoGroupPage("group page");
+  }
+
   public boolean isThereAGroup() {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public int getGroupCount() {
+  public int getGroupCount() { return wd.findElements(By.name("selected[]")).size(); }
 
-   return wd.findElements(By.name("selected[]")).size();
-  }
-
-  public List<GroupData> getGroupList() {
+  public List<GroupData> list() {
 
     List<GroupData> groups = new ArrayList<>();
 

@@ -13,14 +13,15 @@ public class ContactCreationTest extends TestBase {
   @Test
   public void testContactCreation() {
 
-    app.getNavigationHelper().goToHomePage("home");
-    List<ContactInfo> before = app.getContactHelper().getContactList();
+    app.goTo().homePage("home");
+    List<ContactInfo> before = app.contact().list();
 
     ContactInfo newContact = new ContactInfo("Egor", "Ande", "Ytr",
             "Spb", "111-11-11", "test@inbox.ru", "test2@mail.ru", "test_group");
-    app.getContactHelper().createNewContact(newContact, true);
-    app.getNavigationHelper().goToHomePage("home");
-    List<ContactInfo> after = app.getContactHelper().getContactList();
+    app.contact().create(newContact, true);
+    app.goTo().homePage("home");
+
+    List<ContactInfo> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     newContact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());

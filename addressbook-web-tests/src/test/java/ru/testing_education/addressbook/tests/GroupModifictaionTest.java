@@ -1,13 +1,11 @@
 package ru.testing_education.addressbook.tests;
 
-import org.omg.CORBA.Object;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.testing_education.addressbook.model.GroupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupModifictaionTest extends TestBase {
@@ -15,9 +13,9 @@ public class GroupModifictaionTest extends TestBase {
   @BeforeMethod
 
   public void ensurePreconditions() {
-    app.getNavigationHelper().goToGroupPage("groups");
-    if (!app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("test_group", null, null));
+    app.goTo().page("groups");
+    if (app.group().list().size()==0) {
+      app.group().create(new GroupData("test_group", null, null));
     }
   }
 
@@ -25,15 +23,15 @@ public class GroupModifictaionTest extends TestBase {
 
   public void testGroupModification() {
 
-    List<GroupData> before = app.getGroupHelper().getGroupList();
+    List<GroupData> before = app.group().list();
 
     int index = before.size()-1;
     GroupData group = new GroupData(before.get(index).getGroupId(),
             "test_group", "try3", "test2");
 
-    app.getGroupHelper().modifyGroup(index, group);
+    app.group().modify(index, group);
 
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    List<GroupData> after = app.group().list();
 
     Assert.assertEquals(after.size(), before.size());
     before.remove(index);
