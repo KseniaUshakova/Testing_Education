@@ -4,13 +4,14 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import ru.testing_education.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-  protected final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
-  protected final MyApplicationManager applicationManager = new MyApplicationManager();
+  protected static final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
 
 
   public static boolean isAlertPresent(WebDriver wd) {
@@ -22,21 +23,16 @@ public class TestBase {
     }
   }
 
-  @BeforeMethod
+  @BeforeSuite
   public void setUp() throws Exception {
     app.init();
   }
 
 
-  @AfterMethod
+  @AfterSuite
   public void tearDown() {
     app.stop();
   }
 
-  public ApplicationManager getApplicationManager() {
-    return applicationManager;
-  }
 
-  private class MyApplicationManager extends ApplicationManager {
-  }
 }
