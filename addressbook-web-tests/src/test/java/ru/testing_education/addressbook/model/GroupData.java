@@ -3,28 +3,32 @@ package ru.testing_education.addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
-  private int groupId;
-  private final String groupName;
-  private final String groupHeader;
-  private final String groupFooter;
+  private int groupId= Integer.MAX_VALUE;
+  private String groupName;
+  private String groupHeader;
+  private String groupFooter;
 
-  public GroupData(int groupId, String groupName, String groupHeader, String groupFooter) {
+
+  public GroupData withGroupId(int groupId) {
     this.groupId = groupId;
-    this.groupName = groupName;
-    this.groupHeader = groupHeader;
-    this.groupFooter = groupFooter;
+    return this;
   }
 
-  public GroupData(String groupName, String groupHeader, String groupFooter) {
-    this.groupId = 0;
+  public GroupData withGroupName(String groupName) {
     this.groupName = groupName;
-    this.groupHeader = groupHeader;
-    this.groupFooter = groupFooter;
+    return this;
   }
 
-  public void setGroupId(int groupId) {
-    this.groupId = groupId;
+  public GroupData withGroupHeader(String groupHeader) {
+    this.groupHeader = groupHeader;
+    return this;
   }
+
+  public GroupData withGroupFooter(String groupFooter) {
+    this.groupFooter = groupFooter;
+    return this;
+  }
+
 
   public int getGroupId() {
     return groupId;
@@ -47,14 +51,13 @@ public class GroupData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     GroupData groupData = (GroupData) o;
-    return groupId == groupData.groupId &&
-            Objects.equals(groupName, groupData.groupName);
+    return Objects.equals(groupName, groupData.groupName);
   }
 
   @Override
   public int hashCode() {
 
-    return Objects.hash(groupId, groupName);
+    return Objects.hash(groupName);
   }
 
   @Override
@@ -65,4 +68,8 @@ public class GroupData {
             '}';
   }
 
+  public void setGroupId(int groupID) {
+    this.groupId = groupId;
+
+  }
 }

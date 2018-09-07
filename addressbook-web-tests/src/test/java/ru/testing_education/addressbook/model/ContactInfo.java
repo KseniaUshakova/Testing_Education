@@ -3,31 +3,15 @@ package ru.testing_education.addressbook.model;
 import java.util.Objects;
 
 public class ContactInfo {
-  private int id;
-  private final String firstName;
-  private final String middleName;
-  private final String secondName;
-  private final String address;
-  private final String homePhone;
-  private final String email1;
-  private final String email2;
-  private final String group;
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactInfo that = (ContactInfo) o;
-    return id == that.id &&
-            Objects.equals(firstName, that.firstName) &&
-            Objects.equals(secondName, that.secondName);
-  }
-
-  @Override
-  public int hashCode() {
-
-    return Objects.hash(id, firstName, secondName);
-  }
+  private int id = Integer.MAX_VALUE;
+  private  String firstName;
+  private  String middleName;
+  private  String secondName;
+  private  String address;
+  private  String homePhone;
+  private  String email1;
+  private  String email2;
+  private  String group;
 
   @Override
   public String toString() {
@@ -38,29 +22,6 @@ public class ContactInfo {
             '}';
   }
 
-  public ContactInfo(int id, String firstName, String middleName, String secondName, String address, String homePhone, String email1, String email2, String group) {
-    this.id = id;
-    this.firstName = firstName;
-    this.middleName = middleName;
-    this.secondName = secondName;
-    this.address = address;
-    this.homePhone = homePhone;
-    this.email1 = email1;
-    this.email2 = email2;
-    this.group = group;
-  }
-
-  public ContactInfo(String firstName, String middleName, String secondName, String address, String homePhone, String email1, String email2, String group) {
-    this.id = 0;
-    this.firstName = firstName;
-    this.middleName = middleName;
-    this.secondName = secondName;
-    this.address = address;
-    this.homePhone = homePhone;
-    this.email1 = email1;
-    this.email2 = email2;
-    this.group = group;
-  }
 
   public int getId() {
     return id;
@@ -98,7 +59,64 @@ public class ContactInfo {
     return group;
   }
 
-  public void setId(int id) {
+  public ContactInfo withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public ContactInfo withFirstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+  public ContactInfo withMiddleName(String middleName) {
+    this.middleName = middleName;
+    return this;
+  }
+
+  public ContactInfo withSecondName(String secondName) {
+    this.secondName = secondName;
+    return this;
+  }
+
+  public ContactInfo withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactInfo withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
+
+  public ContactInfo withEmail1(String email1) {
+    this.email1 = email1;
+    return this;
+  }
+
+  public ContactInfo withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactInfo that = (ContactInfo) o;
+    return Objects.equals(firstName, that.firstName) &&
+            Objects.equals(secondName, that.secondName);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(firstName, secondName);
+  }
+
+  public ContactInfo withGroup(String group) {
+    this.group = group;
+    return this;
+
   }
 }
