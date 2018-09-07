@@ -6,6 +6,7 @@ import ru.testing_education.addressbook.model.GroupData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 
 public class GroupCreationTest extends TestBase {
@@ -14,18 +15,19 @@ public class GroupCreationTest extends TestBase {
   public void testGroupCreation() {
 
     app.goTo().page("groups");
-    List<GroupData> before = app.group().list();
+    Set<GroupData> before = app.group().all();
     GroupData group = new GroupData().withGroupName("test_group");
     app.group().create(group);
-    List<GroupData> after = app.group().list();
+    Set<GroupData> after = app.group().all();
 
     Assert.assertEquals(after.size(), before.size()+1);
+
+  //  Comparator<? super GroupData> byId = ((g1, g2) -> Integer.compare(g1.getGroupId(),g2.getGroupId()));
+
+    group.withGroupId(after.stream().mapToInt((g)->(g.getGroupId())).max().getAsInt());
+
     before.add(group);
 
-    Comparator<? super GroupData> byId = ((g1, g2) -> Integer.compare(g1.getGroupId(),g2.getGroupId()));
-
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before,after);
 
 

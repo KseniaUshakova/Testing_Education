@@ -7,6 +7,7 @@ import ru.testing_education.addressbook.model.GroupData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class GroupModifictaionTest extends TestBase {
 
@@ -14,7 +15,7 @@ public class GroupModifictaionTest extends TestBase {
 
   public void ensurePreconditions() {
     app.goTo().page("groups");
-    if (app.group().list().size()==0) {
+    if (app.group().all().size()==0) {
       app.group().create(new GroupData().withGroupName("test_group"));
     }
   }
@@ -23,23 +24,20 @@ public class GroupModifictaionTest extends TestBase {
 
   public void testGroupModification() {
 
-    List<GroupData> before = app.group().list();
+    Set<GroupData> before = app.group().all();
 
-    int index = before.size()-1;
-    GroupData group = new GroupData().withGroupId(before.get(index).getGroupId())
+    GroupData modifiedGroup =  before.iterator().next();
+
+    GroupData group = new GroupData().withGroupId(modifiedGroup.getGroupId())
             .withGroupName("test_group").withGroupHeader("try3").withGroupFooter("test2");
 
-    app.group().modify(index, group);
+    app.group().modify(group);
 
-    List<GroupData> after = app.group().list();
+    Set<GroupData> after = app.group().all();
 
     Assert.assertEquals(after.size(), before.size());
-    before.remove(index);
+    before.remove(modifiedGroup);
     before.add(group);
-
-    Comparator<? super GroupData> byId = ((g1, g2) -> Integer.compare(g1.getGroupId(),g2.getGroupId()));
-    before.sort(byId);
-    after.sort(byId);
 
     Assert.assertEquals(before,after);
 

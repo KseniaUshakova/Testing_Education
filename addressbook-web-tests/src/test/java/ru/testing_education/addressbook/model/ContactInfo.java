@@ -74,6 +74,22 @@ public class ContactInfo {
     return this;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactInfo that = (ContactInfo) o;
+    return id == that.id &&
+            Objects.equals(firstName, that.firstName) &&
+            Objects.equals(secondName, that.secondName);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(id, firstName, secondName);
+  }
+
   public ContactInfo withSecondName(String secondName) {
     this.secondName = secondName;
     return this;
@@ -97,21 +113,6 @@ public class ContactInfo {
   public ContactInfo withEmail2(String email2) {
     this.email2 = email2;
     return this;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactInfo that = (ContactInfo) o;
-    return Objects.equals(firstName, that.firstName) &&
-            Objects.equals(secondName, that.secondName);
-  }
-
-  @Override
-  public int hashCode() {
-
-    return Objects.hash(firstName, secondName);
   }
 
   public ContactInfo withGroup(String group) {
