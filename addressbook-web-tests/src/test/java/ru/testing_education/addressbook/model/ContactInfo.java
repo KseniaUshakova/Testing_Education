@@ -11,9 +11,12 @@ public class ContactInfo {
   private  String homePhone;
   private  String email1;
   private  String email2;
+  private  String email3;
   private  String group;
   private String mobilePhone;
   private String workPhone;
+  private String allPhones;
+  private String allEmails;
 
   @Override
   public String toString() {
@@ -41,9 +44,7 @@ public class ContactInfo {
     return secondName;
   }
 
-  public String getAddress() {
-    return address;
-  }
+  public String getAddress() { return address; }
 
   public String getHomePhone() { return homePhone; }
 
@@ -62,6 +63,8 @@ public class ContactInfo {
   public String getEmail2() {
     return email2;
   }
+
+  public String getEmail3() { return email3; }
 
   public String getGroup() {
     return group;
@@ -123,12 +126,16 @@ public class ContactInfo {
     return this;
   }
 
+  public ContactInfo withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
   public ContactInfo withGroup(String group) {
     this.group = group;
     return this;
 
   }
-
 
   public ContactInfo withMobilePhone(String mobilePhone) {
     this.mobilePhone = mobilePhone;
@@ -137,6 +144,26 @@ public class ContactInfo {
 
   public ContactInfo withWorkPhone(String workPhone) {
     this.workPhone = workPhone;
+    return this;
+  }
+
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public ContactInfo withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+  public ContactInfo withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
     return this;
   }
 }
