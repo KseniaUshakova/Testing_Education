@@ -39,9 +39,8 @@ public class ContactModificationTest extends TestBase {
     app.contact().modify(newcontact);
     app.goTo().homePage("home");
 
+    assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();
-
-    assertThat(after.size(), equalTo(before.size()));
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(newcontact)));
 
   }
