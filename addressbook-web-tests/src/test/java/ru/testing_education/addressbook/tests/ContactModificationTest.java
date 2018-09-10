@@ -9,6 +9,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+
 public class ContactModificationTest extends TestBase {
 
 
@@ -44,11 +48,11 @@ public class ContactModificationTest extends TestBase {
 
     Set<ContactInfo> after = app.contact().all();
 
-    Assert.assertEquals(after.size(), before.size());
+    assertThat(after.size(), equalTo(before.size()));
     before.remove(modifiedContact);
     before.add(newcontact);
 
-    Assert.assertEquals(before,after);
+    assertThat(before, equalTo(after));
 
   }
 
