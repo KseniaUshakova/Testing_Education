@@ -12,6 +12,8 @@ public class ContactInfo {
   private  String email1;
   private  String email2;
   private  String group;
+  private String mobilePhone;
+  private String workPhone;
 
   @Override
   public String toString() {
@@ -119,5 +121,16 @@ public class ContactInfo {
     this.group = group;
     return this;
 
+  }
+
+
+  public ContactInfo withMobilePhone(String mobilephone) {
+    this.mobilePhone = mobilephone;
+    return this;
+  }
+
+  public ContactInfo withWorkPhone(String workphone) {
+    this.workPhone = workphone;
+    return this;
   }
 }

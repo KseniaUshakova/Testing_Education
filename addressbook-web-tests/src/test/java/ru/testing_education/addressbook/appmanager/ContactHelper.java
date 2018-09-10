@@ -68,7 +68,7 @@ public class ContactHelper extends HelperBase {
 
   public void initEditContact(int id) {
 
-  click(By.cssSelector("a[href='edit.php?id=" + id+ "']"));
+  click(By.cssSelector(String.format("a[href='edit.php?id=%s'", id)));
 
   }
 
@@ -86,6 +86,8 @@ public class ContactHelper extends HelperBase {
     contactCache = null;
   }
 
+
+
   public void modify(ContactInfo newcontact) {
     selectContactById(newcontact.getId());
     initEditContact(newcontact.getId());
@@ -94,6 +96,26 @@ public class ContactHelper extends HelperBase {
     contactCache = null;
 
   }
+
+
+  public ContactInfo infoFromEditForm(ContactInfo contact) {
+    selectContactById(contact.getId());
+    initEditContact(contact.getId());
+
+    String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
+    String middleName = wd.findElement(By.name("middlename")).getAttribute("value");
+    String lastName = wd.findElement(By.name("lastname")).getAttribute("value");
+    String homePhone = wd.findElement(By.name("home")).getAttribute("value");
+    String mobilePhone = wd.findElement(By.name("mobile")).getAttribute("value");
+    String workPhone = wd.findElement(By.name("work")).getAttribute("value");
+
+    wd.navigate().back();
+
+    return new ContactInfo().withId(contact.getId()).withFirstName(firstName)
+            .withMiddleName(middleName).withSecondName(lastName)
+            .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone);
+    }
+
 
   public void delete(ContactInfo contact) {
 
@@ -130,11 +152,13 @@ public class ContactHelper extends HelperBase {
       String secondName = element.findElements(By.tagName("td")).get(1).getText();
       String firstName = element.findElements(By.tagName("td")).get(2).getText();
 
-      int id = Integer.parseInt(element.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).getAttribute("value"));
+      int id = Integer.parseInt(element.findElements(By.tagName("td")).get(0).findElement(By.tagName("input")).
+              getAttribute("value"));
 
       contactCache.add( new ContactInfo().withId(id).withFirstName(firstName).withSecondName(secondName));
     }
     return new Contacts(contactCache);
   }
+
 
 }
