@@ -45,8 +45,14 @@ public class ContactInfo {
     return address;
   }
 
-  public String getHomePhone() {
-    return homePhone;
+  public String getHomePhone() { return homePhone; }
+
+  public String getMobilePhone() {
+    return mobilePhone;
+  }
+
+  public String getWorkPhone() {
+    return workPhone;
   }
 
   public String getEmail1() {
@@ -124,13 +130,13 @@ public class ContactInfo {
   }
 
 
-  public ContactInfo withMobilePhone(String mobilephone) {
-    this.mobilePhone = mobilephone;
+  public ContactInfo withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
     return this;
   }
 
-  public ContactInfo withWorkPhone(String workphone) {
-    this.workPhone = workphone;
+  public ContactInfo withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
     return this;
   }
 }
