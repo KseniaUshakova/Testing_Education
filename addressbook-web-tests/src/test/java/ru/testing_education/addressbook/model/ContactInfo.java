@@ -1,5 +1,6 @@
 package ru.testing_education.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactInfo {
@@ -17,6 +18,7 @@ public class ContactInfo {
   private String workPhone;
   private String allPhones;
   private String allEmails;
+  private File photo;
 
   @Override
   public String toString() {
@@ -164,6 +166,15 @@ public class ContactInfo {
 
   public ContactInfo withAllEmails(String allEmails) {
     this.allEmails = allEmails;
+    return this;
+  }
+
+  public File getPhoto() {
+    return photo;
+  }
+
+  public ContactInfo withPhoto(File photo) {
+    this.photo = photo;
     return this;
   }
 }

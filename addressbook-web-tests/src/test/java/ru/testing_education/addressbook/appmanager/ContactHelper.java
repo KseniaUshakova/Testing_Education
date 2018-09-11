@@ -1,6 +1,5 @@
 package ru.testing_education.addressbook.appmanager;
 
-import javafx.scene.control.TextArea;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,9 +8,7 @@ import org.testng.Assert;
 import ru.testing_education.addressbook.model.ContactInfo;
 import ru.testing_education.addressbook.model.Contacts;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -37,6 +34,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("email"), contactInfo.getEmail1());
     type(By.name("email2"), contactInfo.getEmail2());
     type(By.name("email3"), contactInfo.getEmail3());
+    attach(By.name("photo"), contactInfo.getPhoto());
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactInfo.getGroup());
@@ -52,9 +50,8 @@ public class ContactHelper extends HelperBase {
   }
 
 
-
   private void selectContactById(int id) {
-    wd.findElement(By.cssSelector("input[id='"+ id +"']")).click();
+    wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
 
   }
 
@@ -72,7 +69,7 @@ public class ContactHelper extends HelperBase {
 
   public void initEditContact(int id) {
 
-  click(By.cssSelector(String.format("a[href='edit.php?id=%s'", id)));
+    click(By.cssSelector(String.format("a[href='edit.php?id=%s'", id)));
 
   }
 
@@ -89,7 +86,6 @@ public class ContactHelper extends HelperBase {
     submitContactCreation();
     contactCache = null;
   }
-
 
 
   public void modify(ContactInfo newcontact) {
@@ -124,7 +120,7 @@ public class ContactHelper extends HelperBase {
             .withMiddleName(middleName).withSecondName(lastName)
             .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone)
             .withEmail1(email1).withEmail2(email2).withEmail3(email3).withAddress(address);
-    }
+  }
 
 
   public void delete(ContactInfo contact) {
@@ -150,9 +146,9 @@ public class ContactHelper extends HelperBase {
 
   public Contacts all() {
 
-  if (contactCache!=null) {
-    return new Contacts(contactCache);
-  }
+    if (contactCache != null) {
+      return new Contacts(contactCache);
+    }
 
     contactCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
@@ -169,8 +165,8 @@ public class ContactHelper extends HelperBase {
       int id = Integer.parseInt(element.findElements(By.tagName("td")).get(0)
               .findElement(By.tagName("input")).getAttribute("value"));
 
-      contactCache.add( new ContactInfo().withId(id).withFirstName(firstName).withSecondName(secondName)
-              .withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address)) ;
+      contactCache.add(new ContactInfo().withId(id).withFirstName(firstName).withSecondName(secondName)
+              .withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address));
     }
     return new Contacts(contactCache);
   }
