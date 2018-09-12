@@ -29,7 +29,7 @@ public class ContactDataGenerator {
     try {
       jComander.parse(args);
 
-    } catch (ParameterException ex){
+    } catch (ParameterException ex) {
       jComander.usage();
       return;
     }
@@ -43,29 +43,30 @@ public class ContactDataGenerator {
   }
 
 
-  private  void save(List<ContactInfo> contacts, File file) throws IOException {
+  private void save(List<ContactInfo> contacts, File file) throws IOException {
 
     Writer write = new FileWriter(file);
 
-    for (ContactInfo contact: contacts){
-      write.write(String.format("%s;%s;%s;%s;%s;%s\n",contact.getFirstName(), contact.getMiddleName(), contact.getSecondName(),
-              contact.getHomePhone(), contact.getAddress(), contact.getEmail1()));
+    for (ContactInfo contact : contacts) {
+      write.write(String.format("%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstName(), contact.getMiddleName(), contact.getSecondName(),
+              contact.getHomePhone(), contact.getAddress(), contact.getEmail1(), contact.getPhoto()));
     }
     write.close();
 
   }
 
-  private  List<ContactInfo> generateContact(int count) {
+  private List<ContactInfo> generateContact(int count) {
 
     List<ContactInfo> contacts = new ArrayList<ContactInfo>();
 
-    for (int i=0; i<count; i++) {
+    for (int i = 0; i < count; i++) {
 
       contacts.add(new ContactInfo()
-              .withFirstName(String.format("test_name %s",i)).withMiddleName(String.format("test_midlename %s",i))
-              .withSecondName(String.format("test_surname %s",i))
-              .withHomePhone("12345").withAddress(String.format("test_address %s",i))
-              .withEmail1(String.format("test_%s@mail.ru",i)));
+              .withFirstName(String.format("test_name %s", i)).withMiddleName(String.format("test_midlename %s", i))
+              .withSecondName(String.format("test_surname %s", i))
+              .withHomePhone("12345").withAddress(String.format("test_address %s", i))
+              .withEmail1(String.format("test_%s@mail.ru", i))
+              .withPhoto(new File("src/test/resources/2063424_cats.jpg")));
     }
     return contacts;
   }
