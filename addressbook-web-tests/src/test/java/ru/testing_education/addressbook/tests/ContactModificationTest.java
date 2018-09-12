@@ -4,6 +4,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.testing_education.addressbook.model.ContactInfo;
 import ru.testing_education.addressbook.model.Contacts;
+import ru.testing_education.addressbook.model.GroupData;
+import ru.testing_education.addressbook.model.Groups;
 
 import java.io.File;
 
@@ -16,6 +18,21 @@ public class ContactModificationTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
+    app.goTo().page("groups");
+
+    if (app.group().all().size() == 0) {
+      app.group().create(new GroupData().withGroupName("test_group"));
+    } else {
+
+      Groups listOfExistedGroups = app.group().all();
+      int countOfTestGr = (int) listOfExistedGroups.stream().map(GroupData::getGroupName).filter((n) -> n.equals("test_group")).count();
+
+      if (countOfTestGr == 0) {
+        app.group().create(new GroupData().withGroupName("test_group"));
+
+      }
+    }
+
     app.goTo().homePage("home");
     if (app.contact().all().size()==00) {
       app.contact().create(new ContactInfo().withFirstName("Sveta").withMiddleName("Petrovna").withSecondName("Foqstand")

@@ -45,19 +45,14 @@ public class ContactCreationTest extends TestBase {
   public Iterator<Object[]> validContacts() throws IOException {
 
     List<Object[]> listContacts = new ArrayList<Object[]>();
-
-
     BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
     String line = reader.readLine();
-
-
     while (line != null) {
 
       String[] split = line.split(";");
       listContacts.add(new Object[]{new ContactInfo()
               .withFirstName(split[0]).withMiddleName(split[1]).withSecondName(split[2])
               .withHomePhone(split[3]).withAddress(split[4]).withEmail1(split[5]).withPhoto(new File(split[6]))});
-
       line = reader.readLine();
     }
 
@@ -77,13 +72,10 @@ public class ContactCreationTest extends TestBase {
 
     app.goTo().homePage("home");
     Contacts before = (Contacts) app.contact().all();
-
     System.out.println(newContact.getFirstName());
     app.contact().create(newContact, true);
     app.goTo().homePage("home");
-
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-
     Contacts after = (Contacts) app.contact().all();
     assertThat(after, equalTo(before.withAdded(newContact.withId(after.stream().mapToInt((g) -> (g.getId())).max().getAsInt()))));
 

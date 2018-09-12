@@ -18,7 +18,7 @@ public class ContactDeletionTest extends TestBase {
     if (app.contact().all().size() == 00) {
       app.contact().create(new ContactInfo().withFirstName("Sveta").withMiddleName("Petrovna").withSecondName("Foqstand")
               .withAddress("Spb").withHomePhone("+8911-000-11-99").withEmail1("test@inbox.ru")
-              .withEmail2("test2@mail.ru").withGroup("test_group"), true);
+              .withEmail2("test2@mail.ru"), true);
     }
   }
 
@@ -35,6 +35,4 @@ public class ContactDeletionTest extends TestBase {
     assertThat(after, equalTo(before.without(deletedContact)));
 
   }
-
-
 }
