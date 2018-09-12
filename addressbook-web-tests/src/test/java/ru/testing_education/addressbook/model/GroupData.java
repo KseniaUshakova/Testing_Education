@@ -3,7 +3,7 @@ package ru.testing_education.addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
-  private int groupId= Integer.MAX_VALUE;
+  private int groupId = Integer.MAX_VALUE;
   private String groupName;
   private String groupHeader;
   private String groupFooter;
@@ -38,9 +38,7 @@ public class GroupData {
     return groupName;
   }
 
-  public String getGroupHeader() {
-    return groupHeader;
-  }
+  public String getGroupHeader() { return groupHeader; }
 
   public String getGroupFooter() {
     return groupFooter;

@@ -20,19 +20,9 @@ public class ContactInfo {
   private String allEmails;
   private File photo;
 
-  @Override
-  public String toString() {
-    return "ContactInfo{" +
-            "id=" + id +
-            ", firstName='" + firstName + '\'' +
-            ", secondName='" + secondName + '\'' +
-            '}';
-  }
 
 
-  public int getId() {
-    return id;
-  }
+  public int getId() { return id; }
 
   public String getFirstName() {
     return firstName;
@@ -85,22 +75,6 @@ public class ContactInfo {
   public ContactInfo withMiddleName(String middleName) {
     this.middleName = middleName;
     return this;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactInfo that = (ContactInfo) o;
-    return id == that.id &&
-            Objects.equals(firstName, that.firstName) &&
-            Objects.equals(secondName, that.secondName);
-  }
-
-  @Override
-  public int hashCode() {
-
-    return Objects.hash(id, firstName, secondName);
   }
 
   public ContactInfo withSecondName(String secondName) {
@@ -177,4 +151,30 @@ public class ContactInfo {
     this.photo = photo;
     return this;
   }
+  @Override
+  public String toString() {
+    return "ContactInfo{" +
+            "id=" + id +
+            ", firstName='" + firstName + '\'' +
+            ", secondName='" + secondName + '\'' +
+            '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactInfo that = (ContactInfo) o;
+    return id == that.id &&
+            Objects.equals(firstName, that.firstName) &&
+            Objects.equals(secondName, that.secondName);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(id, firstName, secondName);
+  }
+
+
 }

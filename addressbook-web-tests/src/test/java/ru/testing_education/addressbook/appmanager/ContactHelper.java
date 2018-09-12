@@ -27,17 +27,47 @@ public class ContactHelper extends HelperBase {
     type(By.name("firstname"), contactInfo.getFirstName());
     type(By.name("middlename"), contactInfo.getMiddleName());
     type(By.name("lastname"), contactInfo.getSecondName());
-    type(By.name("address"), contactInfo.getAddress());
-    type(By.name("home"), contactInfo.getHomePhone());
-    type(By.name("mobile"), contactInfo.getMobilePhone());
-    type(By.name("work"), contactInfo.getWorkPhone());
-    type(By.name("email"), contactInfo.getEmail1());
-    type(By.name("email2"), contactInfo.getEmail2());
-    type(By.name("email3"), contactInfo.getEmail3());
-    attach(By.name("photo"), contactInfo.getPhoto());
+
+    if (contactInfo.getAddress() != null) {
+      type(By.name("address"), contactInfo.getAddress());
+    }
+
+    if (contactInfo.getHomePhone() != null) {
+      type(By.name("home"), contactInfo.getHomePhone());
+    }
+
+    if (contactInfo.getMobilePhone() != null) {
+      type(By.name("mobile"), contactInfo.getMobilePhone());
+    }
+
+    if (contactInfo.getWorkPhone() != null) {
+      type(By.name("work"), contactInfo.getWorkPhone());
+    }
+    ;
+
+    // type(By.name("mobile"), contactInfo.getMobilePhone());
+    // type(By.name("work"), contactInfo.getWorkPhone());
+
+    if (contactInfo.getEmail1() != null) {
+      type(By.name("email"), contactInfo.getEmail1());
+    }
+    if (contactInfo.getEmail2() != null) {
+      type(By.name("email2"), contactInfo.getEmail2());
+    }
+
+    if (contactInfo.getEmail3() != null){
+      type(By.name("email3"), contactInfo.getEmail3());
+    }
+    if (contactInfo.getPhoto() != null) {
+      attach(By.name("photo"), contactInfo.getPhoto());
+    }
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactInfo.getGroup());
+
+      if (contactInfo.getGroup() != null) {
+
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactInfo.getGroup());
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -89,7 +119,7 @@ public class ContactHelper extends HelperBase {
 
 
   public void modify(ContactInfo newcontact) {
-   selectContactById(newcontact.getId());
+    selectContactById(newcontact.getId());
     initEditContact(newcontact.getId());
     fillContactDetails(newcontact, false);
     acceptUpdateContact();
