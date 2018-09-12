@@ -8,7 +8,7 @@ import ru.testing_education.addressbook.model.Contacts;
 import ru.testing_education.addressbook.model.GroupData;
 import ru.testing_education.addressbook.model.Groups;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,19 +40,33 @@ public class ContactCreationTest extends TestBase {
   }
 
 
+
   @DataProvider
-  public Iterator<Object[]> validContacts() {
+  public Iterator<Object[]> validContacts() throws IOException {
+
     List<Object[]> listContacts = new ArrayList<Object[]>();
 
-    listContacts.add(new Object[]{new ContactInfo()
-            .withFirstName("Anya").withSecondName("Ivanova")});
 
-    listContacts.add(new Object[]{new ContactInfo()
-            .withFirstName("Fedya").withMiddleName("Andreyvich").withSecondName("Smirnov")
-            .withAddress("Moscow" + "\n" + "Irinovskii 38" + "\n" + "kv 98")
-            .withHomePhone("111-11-11").withMobilePhone("+516-4575-6").withWorkPhone("3456 354")
-            .withEmail1("test@inbox.ru").withEmail2("test2@mail.ru").withEmail3("easy@gh.com")
-            .withGroup("test_group").withPhoto(new File("src/test/resources/2063424_cats.jpg"))});
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
+    String line = reader.readLine();
+
+
+    while (line != null) {
+
+      String[] split = line.split(";");
+      listContacts.add(new Object[]{new ContactInfo()
+              .withFirstName(split[0]).withMiddleName(split[1]).withSecondName(split[2])
+              .withHomePhone(split[3]).withAddress(split[4]).withEmail1(split[5]).withPhoto(new File(split[6]))});
+
+      line = reader.readLine();
+    }
+
+    // listContacts.add(new Object[]{new ContactInfo()
+    //         .withFirstName("Fedya").withMiddleName("Andreyvich").withSecondName("Smirnov")
+    //         .withAddress("Moscow" + "\n" + "Irinovskii 38" + "\n" + "kv 98")
+    //         .withHomePhone("111-11-11").withMobilePhone("+516-4575-6").withWorkPhone("3456 354")
+    //         .withEmail1("test@inbox.ru").withEmail2("test2@mail.ru").withEmail3("easy@gh.com")
+    //         .withGroup("test_group").withPhoto(new File("src/test/resources/2063424_cats.jpg"))});
 
     return listContacts.iterator();
 
@@ -64,15 +78,7 @@ public class ContactCreationTest extends TestBase {
     app.goTo().homePage("home");
     Contacts before = (Contacts) app.contact().all();
 
-    //  File photo = new File("src/test/resources/2063424_cats.jpg");
-    //   ContactInfo newContact = new ContactInfo()
-    //          .withFirstName("Fedya").withMiddleName("Andreyvich").withSecondName("Smirnov")
-    //          .withAddress("Moscow"+"\n"+"Irinovskii 38"+"\n"+"kv 98")
-    //          .withHomePhone("111-11-11").withMobilePhone("+516-4575-6").withWorkPhone("3456 354")
-    //          .withEmail1("test@inbox.ru").withEmail2("test2@mail.ru").withEmail3("easy@gh.com")
-    //          .withGroup("test_group")
-    //         .withPhoto(photo);
-
+    System.out.println(newContact.getFirstName());
     app.contact().create(newContact, true);
     app.goTo().homePage("home");
 
@@ -83,7 +89,7 @@ public class ContactCreationTest extends TestBase {
 
   }
 
-  @Test
+  @Test(enabled = false)
 
   public void testCurDir() {
     File curDir = new File(".");
