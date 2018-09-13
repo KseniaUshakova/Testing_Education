@@ -1,0 +1,35 @@
+[
+  {
+    "firstName": "test_name 0",
+    "middleName": "test_midlename 0",
+    "secondName": "test_surname 0",
+    "address": "test_address 0",
+    "homePhone": "12345",
+    "email1": "test_0@mail.ru",
+    "photo": {
+      "path": "src/test/resources/2063424_cats.jpg"
+    }
+  },
+  {
+    "firstName": "test_name 1",
+    "middleName": "test_midlename 1",
+    "secondName": "test_surname 1",
+    "address": "test_address 1",
+    "homePhone": "12345",
+    "email1": "test_1@mail.ru",
+    "photo": {
+      "path": "src/test/resources/2063424_cats.jpg"
+    }
+  },
+  {
+    "firstName": "test_name 2",
+    "middleName": "test_midlename 2",
+    "secondName": "test_surname 2",
+    "address": "test_address 2",
+    "homePhone": "12345",
+    "email1": "test_2@mail.ru",
+    "photo": {
+      "path": "src/test/resources/2063424_cats.jpg"
+    }
+  }
+]

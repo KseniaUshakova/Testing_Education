@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.testing_education.addressbook.model.ContactInfo;
 
+import java.beans.Transient;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

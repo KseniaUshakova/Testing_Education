@@ -58,10 +58,14 @@ public class GroupDataGenerator {
     XStream xstream = new XStream();
     xstream.processAnnotations(GroupData.class);
     String xml = xstream.toXML(groups);
-    Writer writer = new FileWriter(file);
-    writer.write(xml);
-    writer.close();
-
+    Writer writer = null;
+    try {
+      writer = new FileWriter(file);
+      writer.write(xml);
+    } finally {
+      if (writer != null)
+        writer.close();
+    }
   }
 
 
