@@ -30,7 +30,8 @@ public class ContactCreationTest extends TestBase {
     } else {
 
       Groups listOfExistedGroups = app.group().all();
-      int countOfTestGr = (int) listOfExistedGroups.stream().map(GroupData::getGroupName).filter((n) -> n.equals("test_group")).count();
+      int countOfTestGr = (int) listOfExistedGroups.stream()
+              .map(GroupData::getGroupName).filter((n) -> n.equals("test_group")).count();
 
       if (countOfTestGr == 0) {
         app.group().create(new GroupData().withGroupName("test_group"));
