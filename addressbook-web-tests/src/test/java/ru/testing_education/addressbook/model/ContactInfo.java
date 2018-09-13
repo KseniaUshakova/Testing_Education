@@ -1,10 +1,13 @@
 package ru.testing_education.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.File;
 import java.util.Objects;
 
 public class ContactInfo {
-  private int id = Integer.MAX_VALUE;
+
+  private transient int id = Integer.MAX_VALUE;
   private  String firstName;
   private  String middleName;
   private  String secondName;

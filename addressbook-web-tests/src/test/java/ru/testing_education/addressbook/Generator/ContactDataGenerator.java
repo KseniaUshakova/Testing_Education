@@ -3,12 +3,15 @@ package ru.testing_education.addressbook.Generator;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ru.testing_education.addressbook.model.ContactInfo;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,8 @@ public class ContactDataGenerator {
   @Parameter(names = "-f", description = "Target File")
   public String file;
 
+  @Parameter(names = "-d", description = "Format File")
+  public String format;
 
   public static void main(String[] args) throws IOException {
 
@@ -39,11 +44,28 @@ public class ContactDataGenerator {
 
   private void run() throws IOException {
     List<ContactInfo> contacts = generateContact(count);
-    save(contacts, new File(file));
+
+    if (format.equals("csv")) {
+      saveAsCSV(contacts, new File(file));
+    } else if (format.equals("json")) {
+      saveAsJson(contacts, new File(file));
+    } else {
+      System.out.println("Urecornised format" + format);
+    }
+  }
+
+  private void saveAsJson(List<ContactInfo> contacts, File file) throws IOException {
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    String json =gson.toJson(contacts);
+    Writer writer = new FileWriter(file);
+    writer.write(json);
+    writer.close();
+
+
   }
 
 
-  private void save(List<ContactInfo> contacts, File file) throws IOException {
+  private void saveAsCSV(List<ContactInfo> contacts, File file) throws IOException {
 
     Writer write = new FileWriter(file);
 

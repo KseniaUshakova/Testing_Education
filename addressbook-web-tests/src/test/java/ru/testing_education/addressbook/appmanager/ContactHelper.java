@@ -43,10 +43,6 @@ public class ContactHelper extends HelperBase {
     if (contactInfo.getWorkPhone() != null) {
       type(By.name("work"), contactInfo.getWorkPhone());
     }
-    ;
-
-    // type(By.name("mobile"), contactInfo.getMobilePhone());
-    // type(By.name("work"), contactInfo.getWorkPhone());
 
     if (contactInfo.getEmail1() != null) {
       type(By.name("email"), contactInfo.getEmail1());

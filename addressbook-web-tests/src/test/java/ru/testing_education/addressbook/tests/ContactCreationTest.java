@@ -1,5 +1,7 @@
 package ru.testing_education.addressbook.tests;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -8,10 +10,14 @@ import ru.testing_education.addressbook.model.Contacts;
 import ru.testing_education.addressbook.model.GroupData;
 import ru.testing_education.addressbook.model.Groups;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -40,10 +46,26 @@ public class ContactCreationTest extends TestBase {
     }
   }
 
+  @DataProvider
+  public Iterator<Object[]> validContactsFromJson() throws IOException {
+
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")));
+    String json = "";
+    String line = reader.readLine();
+    while (line != null) {
+      json += line;
+      line = reader.readLine();
+    }
+
+    Gson gson = new Gson();
+    List<ContactInfo> contacts= gson.fromJson(json, new TypeToken<List<ContactInfo>>() {}.getType());
+    return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+
+  }
 
 
   @DataProvider
-  public Iterator<Object[]> validContacts() throws IOException {
+  public Iterator<Object[]> validContactsFromCsv() throws IOException {
 
     List<Object[]> listContacts = new ArrayList<Object[]>();
     BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
@@ -68,7 +90,7 @@ public class ContactCreationTest extends TestBase {
 
   }
 
-  @Test(dataProvider = "validContacts")
+  @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactInfo newContact) {
 
     app.goTo().homePage("home");
