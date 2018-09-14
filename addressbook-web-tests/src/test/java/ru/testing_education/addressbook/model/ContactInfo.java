@@ -126,7 +126,6 @@ public class ContactInfo {
     return this;
   }
 
-
   public String getAllPhones() {
     return allPhones;
   }
@@ -135,7 +134,6 @@ public class ContactInfo {
     this.allPhones = allPhones;
     return this;
   }
-
 
   public String getAllEmails() {
     return allEmails;
@@ -175,7 +173,6 @@ public class ContactInfo {
 
   @Override
   public int hashCode() {
-
     return Objects.hash(id, firstName, secondName);
   }
 

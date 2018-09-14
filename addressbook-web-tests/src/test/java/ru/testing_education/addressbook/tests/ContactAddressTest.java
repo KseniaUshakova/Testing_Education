@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.equalToObject;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ConactAddressTest extends TestBase{
+public class ContactAddressTest extends TestBase{
 
   @BeforeMethod
   public void ensurePreconditions(){

@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ConactEmailsTest extends TestBase{
+public class ContactEmailsTest extends TestBase {
 
   @BeforeMethod
-  public void ensurePreconditions(){
+  public void ensurePreconditions() {
     app.goTo().homePage("home");
-    if (app.contact().all().size()==00) {
+    if (app.contact().all().size() == 00) {
       app.contact().create(new ContactInfo()
               .withFirstName("Sveta").withMiddleName("Petrovna").withSecondName("Foqstand")
               .withAddress("Spb")
@@ -34,21 +34,20 @@ public class ConactEmailsTest extends TestBase{
     ContactInfo contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
     assertThat(mergeEmails(contactInfoFromEditForm), equalTo(contact.getAllEmails()));
-    }
+  }
 
   private String mergeEmails(ContactInfo contact) {
 
-   return Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3())
-            .stream().filter((p)-> ! p.equals(""))
-           .collect(Collectors.joining("\n"));
+    return Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3())
+            .stream().filter((p) -> !p.equals(""))
+            .collect(Collectors.joining("\n"));
   }
 
-  public static String cleaned (String phone){
+  public static String cleaned(String phone) {
 
-    return phone.replaceAll("\\s","").replaceAll("[-()]","");
+    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
 
-    }
-
+  }
 
 
 }

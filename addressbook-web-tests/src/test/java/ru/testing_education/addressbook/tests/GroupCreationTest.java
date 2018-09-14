@@ -10,10 +10,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -23,30 +21,30 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GroupCreationTest extends TestBase {
 
   @DataProvider
-  public Iterator<Object[]> validGroups() throws IOException {
+  public Iterator<Object[]> validGroupsFromXML() throws IOException {
 
 
-    List<Object[]> listGroups = new ArrayList<Object[]>();
+    try (BufferedReader reader = new BufferedReader(
+            new FileReader(new File("src/test/resources/groups.xml")))) {
 
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")));
+      String xml = "";
+      String line = reader.readLine();
 
-    String xml = "";
-    String line = reader.readLine();
+      while (line != null) {
+        xml += line;
+        line = reader.readLine();
+      }
 
-    while (line != null) {
-      xml +=line;
-      line = reader.readLine();
-    }
+      XStream xstrem = new XStream();
+      xstrem.processAnnotations(GroupData.class);
+      List<GroupData> groups = (List<GroupData>) xstrem.fromXML(xml);
 
-    XStream xstrem= new XStream();
-    xstrem.processAnnotations(GroupData.class);
-    List<GroupData> groups= (List<GroupData>) xstrem.fromXML(xml);
-
-    return groups.stream().map((g)-> new Object[] {g}).collect(Collectors.toList()).iterator();
+      return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
 
  /*
    Reading from CSV
-   BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+    List<Object[]> listGroups = new ArrayList<Object[]>();
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
 
     String line = reader.readLine();
     while (line != null) {
@@ -57,9 +55,10 @@ public class GroupCreationTest extends TestBase {
     return listGroups.iterator();
      */
 
+    }
   }
 
-  @Test(dataProvider = "validGroups")
+  @Test(dataProvider = "validGroupsFromXML")
   public void testGroupCreation(GroupData group) {
 
     app.goTo().page("groups");

@@ -7,12 +7,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.testing_education.addressbook.model.ContactInfo;
 
-import java.beans.Transient;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,25 +55,22 @@ public class ContactDataGenerator {
 
   private void saveAsJson(List<ContactInfo> contacts, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    String json =gson.toJson(contacts);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
-
-
+    String json = gson.toJson(contacts);
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(json);
+    }
   }
 
 
   private void saveAsCSV(List<ContactInfo> contacts, File file) throws IOException {
 
-    Writer write = new FileWriter(file);
+   try ( Writer write = new FileWriter(file)) {
 
-    for (ContactInfo contact : contacts) {
-      write.write(String.format("%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstName(), contact.getMiddleName(), contact.getSecondName(),
-              contact.getHomePhone(), contact.getAddress(), contact.getEmail1(), contact.getPhoto()));
-    }
-    write.close();
-
+     for (ContactInfo contact : contacts) {
+       write.write(String.format("%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstName(), contact.getMiddleName(), contact.getSecondName(),
+               contact.getHomePhone(), contact.getAddress(), contact.getEmail1(), contact.getPhoto()));
+     }
+   }
   }
 
   private List<ContactInfo> generateContact(int count) {
