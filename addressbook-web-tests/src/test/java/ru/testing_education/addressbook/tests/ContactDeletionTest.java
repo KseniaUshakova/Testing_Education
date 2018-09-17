@@ -1,5 +1,7 @@
 package ru.testing_education.addressbook.tests;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.testing_education.addressbook.model.ContactInfo;
@@ -10,6 +12,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class ContactDeletionTest extends TestBase {
+
+  Logger logger = LoggerFactory.getLogger(ContactDeletionTest.class);
 
 
   @BeforeMethod
@@ -33,6 +37,5 @@ public class ContactDeletionTest extends TestBase {
     assertThat(app.contact().count(), equalTo(before.size() - 1));
     Contacts after = app.contact().all();
     assertThat(after, equalTo(before.without(deletedContact)));
-
   }
 }

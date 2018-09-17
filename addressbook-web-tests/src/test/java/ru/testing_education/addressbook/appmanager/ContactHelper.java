@@ -126,7 +126,7 @@ public class ContactHelper extends HelperBase {
 
 
   public ContactInfo infoFromEditForm(ContactInfo contact) {
-    selectContactById(contact.getId());
+    //selectContactById(contact.getId());
     initEditContact(contact.getId());
 
     String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
@@ -141,7 +141,7 @@ public class ContactHelper extends HelperBase {
     String address = wd.findElement(By.name("address")).getAttribute("value");
 
 
-    wd.navigate().back();
+   // wd.navigate().back();
 
     return new ContactInfo().withId(contact.getId()).withFirstName(firstName)
             .withMiddleName(middleName).withSecondName(lastName)

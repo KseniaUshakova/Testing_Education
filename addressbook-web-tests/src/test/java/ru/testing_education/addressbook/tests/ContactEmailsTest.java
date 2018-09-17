@@ -15,7 +15,7 @@ public class ContactEmailsTest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage("home");
-    if (app.contact().all().size() == 00) {
+    if (app.contact().all().size() == 0) {
       app.contact().create(new ContactInfo()
               .withFirstName("Sveta").withMiddleName("Petrovna").withSecondName("Foqstand")
               .withAddress("Spb")
