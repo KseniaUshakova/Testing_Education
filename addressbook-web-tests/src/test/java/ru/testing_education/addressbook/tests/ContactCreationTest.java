@@ -95,7 +95,7 @@ public class ContactCreationTest extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validContactsFromJson")
+  @Test(dataProvider = "validContactsFromCsv")
   public void testContactCreation(ContactInfo newContact) {
 
     app.goTo().homePage("home");

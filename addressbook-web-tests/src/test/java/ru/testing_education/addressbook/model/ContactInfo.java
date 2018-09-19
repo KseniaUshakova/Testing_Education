@@ -1,27 +1,67 @@
 package ru.testing_education.addressbook.model;
 
-import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+
 
 import java.io.File;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addressbook")
 public class ContactInfo {
 
-  private transient int id = Integer.MAX_VALUE;
+  @Id
+  @Column(name = "id")
+  private int id = Integer.MAX_VALUE;
+
+  @Column (name = "firstname")
   private  String firstName;
+  @Column (name = "middlename")
   private  String middleName;
+  @Column (name = "lastname")
   private  String secondName;
+
+  @Column (name = "address")
+  @Type(type = "text")
   private  String address;
+
+  @Column (name = "home")
+  @Type(type = "text")
   private  String homePhone;
+
+  @Column (name = "email")
+  @Type(type = "text")
   private  String email1;
+
+  @Column (name = "email2")
+  @Type(type = "text")
   private  String email2;
+
+  @Column (name = "email3")
+  @Type(type = "text")
   private  String email3;
+
+  @Transient
   private  String group;
+
+  @Column (name = "mobile")
+  @Type(type = "text")
   private String mobilePhone;
+
+  @Column (name = "work")
+  @Type(type = "text")
   private String workPhone;
+
+  @Transient
   private String allPhones;
+  @Transient
   private String allEmails;
-  private File photo;
+
+  @Column (name = "photo")
+  @Type(type = "text")
+  private String photo;
 
 
 
@@ -145,11 +185,11 @@ public class ContactInfo {
   }
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
   public ContactInfo withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
   @Override
