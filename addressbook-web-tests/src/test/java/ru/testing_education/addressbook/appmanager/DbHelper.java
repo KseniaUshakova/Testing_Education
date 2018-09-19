@@ -6,6 +6,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import ru.testing_education.addressbook.model.ContactInfo;
+import ru.testing_education.addressbook.model.Contacts;
 import ru.testing_education.addressbook.model.GroupData;
 import ru.testing_education.addressbook.model.Groups;
 
@@ -29,6 +30,17 @@ public class DbHelper {
     session.getTransaction().commit();
     session.close();
     return new Groups(result);
+  }
+
+  public Contacts contacts() {
+
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactInfo> result = session.createQuery("from ContactInfo where deprecated='0000-00-00'").list();
+    session.getTransaction().commit();
+    session.close();
+    return new Contacts(result);
+
   }
 }
 

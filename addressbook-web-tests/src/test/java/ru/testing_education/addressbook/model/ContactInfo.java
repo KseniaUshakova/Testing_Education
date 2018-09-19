@@ -1,5 +1,6 @@
 package ru.testing_education.addressbook.model;
 
+import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Objects;
 @Table(name = "addressbook")
 public class ContactInfo {
 
+  @Expose(serialize = false, deserialize = false)
   @Id
   @Column(name = "id")
   private int id = Integer.MAX_VALUE;
@@ -63,7 +65,10 @@ public class ContactInfo {
   @Type(type = "text")
   private String photo;
 
-
+  @PostLoad
+  private void postLoad() {
+    address = address.replaceAll("\r", "");
+  }
 
   public int getId() { return id; }
 
@@ -150,6 +155,48 @@ public class ContactInfo {
     return this;
   }
 
+  @Override
+  public String toString() {
+    return "ContactInfo{" +
+            "id=" + id +
+            ", firstName='" + firstName + '\'' +
+            ", middleName='" + middleName + '\'' +
+            ", secondName='" + secondName + '\'' +
+            ", address='" + address + '\'' +
+            ", homePhone='" + homePhone + '\'' +
+            ", email1='" + email1 + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
+            ", mobilePhone='" + mobilePhone + '\'' +
+            ", workPhone='" + workPhone + '\'' +
+            '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactInfo that = (ContactInfo) o;
+    return id == that.id &&
+            Objects.equals(firstName, that.firstName) &&
+            Objects.equals(middleName, that.middleName) &&
+            Objects.equals(secondName, that.secondName) &&
+            Objects.equals(address, that.address) &&
+            Objects.equals(homePhone, that.homePhone) &&
+            Objects.equals(email1, that.email1) &&
+            Objects.equals(email2, that.email2) &&
+            Objects.equals(email3, that.email3) &&
+            Objects.equals(mobilePhone, that.mobilePhone) &&
+            Objects.equals(workPhone, that.workPhone);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(id, firstName, middleName, secondName,
+            homePhone, email1, email2, email3, mobilePhone, workPhone);
+  }
+
   public ContactInfo withGroup(String group) {
     this.group = group;
     return this;
@@ -185,6 +232,9 @@ public class ContactInfo {
   }
 
   public File getPhoto() {
+    if (photo==null){
+      return null;
+    }
     return new File(photo);
   }
 
@@ -192,29 +242,5 @@ public class ContactInfo {
     this.photo = photo.getPath();
     return this;
   }
-  @Override
-  public String toString() {
-    return "ContactInfo{" +
-            "id=" + id +
-            ", firstName='" + firstName + '\'' +
-            ", secondName='" + secondName + '\'' +
-            '}';
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactInfo that = (ContactInfo) o;
-    return id == that.id &&
-            Objects.equals(firstName, that.firstName) &&
-            Objects.equals(secondName, that.secondName);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, firstName, secondName);
-  }
-
 
 }
