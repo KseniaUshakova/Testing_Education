@@ -5,10 +5,11 @@
         <classes>
             <class name="ru.testing_education.addressbook.tests.ContactCreationTest" />
             <class name="ru.testing_education.addressbook.tests.ContactModificationTest" />
-            <class name="ru.testing_education.addressbook.tests.ContactDeletionTest" />
             <class name="ru.testing_education.addressbook.tests.ContactAddressTest" />
             <class name="ru.testing_education.addressbook.tests.ContactEmailsTest" />
             <class name="ru.testing_education.addressbook.tests.ContactPhonesTest" />
+            <class name="ru.testing_education.addressbook.tests.ContactDeletionTest" />
+
         </classes>
     </test>
 
