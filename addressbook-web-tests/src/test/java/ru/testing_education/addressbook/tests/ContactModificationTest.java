@@ -53,7 +53,9 @@ public class ContactModificationTest extends TestBase {
             .withFirstName("Modified").withMiddleName("Modified").withSecondName("Modified")
             .withAddress("Spb" + "\n" + "Irinovskii 38" + "\n" + "kv 98")
             .withHomePhone("9098").withMobilePhone("+516-4575-6").withWorkPhone("3456 354")
-            .withEmail1("test@inbox.ru").withEmail2("test2@mail.ru").withEmail3("easy@gh.com")
+            .withEmail1("test@inbox.ru")
+            .withEmail2("")
+            .withEmail3("easy@gh.com")
             .withGroup("test_group").withPhoto(new File("src/test/resources/2063424_cats.jpg"));
     app.goTo().homePage("home");
     app.contact().modify(newcontact);
