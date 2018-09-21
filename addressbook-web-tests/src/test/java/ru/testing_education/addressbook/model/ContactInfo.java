@@ -178,175 +178,36 @@ public class ContactInfo {
             '}';
   }
 
+  public boolean equalsString(String s1, String s2) {
+
+    if (s1 == null && s2 == null) {
+      return true;
+    } else if (s1 == null && s2.equals("") || s1.equals("") && s2 == null) {
+      return true;
+    } else {
+      return Objects.equals(s1, s2);
+    }
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactInfo that = (ContactInfo) o;
 
-    if (workPhone == null && mobilePhone == null && email3 == null && email2 == null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1);
-    } else if (workPhone == null && mobilePhone == null && email3 == null && email2 != null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(email2, that.email2);
-    } else if (workPhone == null && mobilePhone == null && email3 != null && email2 == null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(email3, that.email3);
-    } else if (workPhone == null && mobilePhone == null && email3 != null && email2 != null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(email2, that.email2) &&
-              Objects.equals(email3, that.email3);
-    } else if (workPhone == null && mobilePhone != null && email3 == null && email2 == null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(mobilePhone, that.mobilePhone);
-    } else if (workPhone == null && mobilePhone != null && email3 == null && email2 != null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(email2, that.email2) &&
-              Objects.equals(mobilePhone, that.mobilePhone);
-    } else if (workPhone == null && mobilePhone != null && email3 != null && email2 == null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(email3, that.email3) &&
-              Objects.equals(mobilePhone, that.mobilePhone);
-    } else if (workPhone == null && mobilePhone != null && email3 != null && email2 != null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(email2, that.email2) &&
-              Objects.equals(email3, that.email3) &&
-              Objects.equals(mobilePhone, that.mobilePhone);
-    } else if (workPhone != null && mobilePhone == null && email3 == null && email2 == null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(workPhone, that.workPhone);
-    } else if (workPhone != null && mobilePhone == null && email3 == null && email2 != null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(email2, that.email2) &&
-              Objects.equals(workPhone, that.workPhone);
-    } else if (workPhone != null && mobilePhone == null && email3 != null && email2 == null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(email3, that.email3) &&
-              Objects.equals(workPhone, that.workPhone);
-    } else if (workPhone != null && mobilePhone == null && email3 != null && email2 != null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(email2, that.email2) &&
-              Objects.equals(email3, that.email3) &&
-              Objects.equals(workPhone, that.workPhone);
-    } else if (workPhone != null && mobilePhone != null && email3 == null && email2 == null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(mobilePhone, that.mobilePhone) &&
-              Objects.equals(workPhone, that.workPhone);
-    } else if (workPhone != null && mobilePhone != null && email3 == null && email2 != null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(email2, that.email2) &&
-              Objects.equals(mobilePhone, that.mobilePhone) &&
-              Objects.equals(workPhone, that.workPhone);
-    } else if (workPhone != null && mobilePhone != null && email3 != null && email2 == null) {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(email3, that.email3) &&
-              Objects.equals(mobilePhone, that.mobilePhone) &&
-              Objects.equals(workPhone, that.workPhone);
-    } else {
-      return id == that.id &&
-              Objects.equals(firstName, that.firstName) &&
-              Objects.equals(middleName, that.middleName) &&
-              Objects.equals(secondName, that.secondName) &&
-              Objects.equals(address, that.address) &&
-              Objects.equals(homePhone, that.homePhone) &&
-              Objects.equals(email1, that.email1) &&
-              Objects.equals(email2, that.email2) &&
-              Objects.equals(email3, that.email3) &&
-              Objects.equals(mobilePhone, that.mobilePhone) &&
-              Objects.equals(workPhone, that.workPhone);
+    return id == that.id &&
+            Objects.equals(firstName, that.firstName) &&
+            Objects.equals(middleName, that.middleName) &&
+            Objects.equals(secondName, that.secondName) &&
+            Objects.equals(address, that.address) &&
+            Objects.equals(homePhone, that.homePhone) &&
+            Objects.equals(email1, that.email1) &&
+            equalsString(email2, that.email2) &&
+            equalsString(email3, that.email3) &&
+            equalsString(mobilePhone, that.mobilePhone) &&
+            equalsString(workPhone, that.workPhone);
 
-
-    }
   }
 
 
