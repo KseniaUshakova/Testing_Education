@@ -24,9 +24,6 @@ public class NavigationHelper extends HelperBase {
 
   public void homePage(String home) {
 
-    if (isElementPresent(By.id("maintable"))) {
-      return;
-    }
     click(By.linkText(home));
   }
 

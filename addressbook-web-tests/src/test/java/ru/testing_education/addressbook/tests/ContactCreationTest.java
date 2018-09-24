@@ -31,11 +31,11 @@ public class ContactCreationTest extends TestBase {
 
     app.goTo().page("groups");
 
-    if (app.group().all().size() == 0) {
+    if (app.db().groups().size() == 0) {
       app.group().create(new GroupData().withGroupName("test_group"));
     } else {
 
-      Groups listOfExistedGroups = app.group().all();
+      Groups listOfExistedGroups = app.db().groups();
       int countOfTestGr = (int) listOfExistedGroups.stream()
               .map(GroupData::getGroupName).filter((n) -> n.equals("test_group")).count();
 
@@ -100,6 +100,9 @@ public class ContactCreationTest extends TestBase {
 
     app.goTo().homePage("home");
     Contacts before = (Contacts) app.db().contacts();
+    Groups dbGroups = (Groups) app.db().groups();
+
+    newContact = newContact.inGroup(dbGroups.iterator().next());
     app.contact().create(newContact, true);
     app.goTo().homePage("home");
     assertThat(app.contact().count(), equalTo(before.size() + 1));

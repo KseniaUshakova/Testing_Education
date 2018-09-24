@@ -5,7 +5,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -43,9 +45,6 @@ public class ContactInfo {
   @Type(type = "text")
   private String email3;
 
-  @Transient
-  private String group;
-
   @Column(name = "mobile")
   @Type(type = "text")
   private String mobilePhone;
@@ -62,6 +61,11 @@ public class ContactInfo {
   @Column(name = "photo")
   @Type(type = "text")
   private String photo;
+
+  @ManyToMany (fetch = FetchType.EAGER)
+  @JoinTable(name="address_in_groups",
+          joinColumns = @JoinColumn(name="id"), inverseJoinColumns = @JoinColumn(name="group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
   @PostLoad
   private void postLoad() {
@@ -112,9 +116,6 @@ public class ContactInfo {
     return email3;
   }
 
-  public String getGroup() {
-    return group;
-  }
 
   public ContactInfo withId(int id) {
     this.id = id;
@@ -197,12 +198,12 @@ public class ContactInfo {
     ContactInfo that = (ContactInfo) o;
 
     return id == that.id &&
-            Objects.equals(firstName, that.firstName) &&
-            Objects.equals(middleName, that.middleName) &&
-            Objects.equals(secondName, that.secondName) &&
-            Objects.equals(address, that.address) &&
-            Objects.equals(homePhone, that.homePhone) &&
-            Objects.equals(email1, that.email1) &&
+            equalsString(firstName, that.firstName) &&
+            equalsString(middleName, that.middleName) &&
+            equalsString(secondName, that.secondName) &&
+            equalsString(address, that.address) &&
+            equalsString(homePhone, that.homePhone) &&
+            equalsString(email1, that.email1) &&
             equalsString(email2, that.email2) &&
             equalsString(email3, that.email3) &&
             equalsString(mobilePhone, that.mobilePhone) &&
@@ -210,6 +211,9 @@ public class ContactInfo {
 
   }
 
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
 
   @Override
   public int hashCode() {
@@ -218,11 +222,6 @@ public class ContactInfo {
             homePhone, email1, email2, email3, mobilePhone, workPhone);
   }
 
-  public ContactInfo withGroup(String group) {
-    this.group = group;
-    return this;
-
-  }
 
   public ContactInfo withMobilePhone(String mobilePhone) {
     this.mobilePhone = mobilePhone;
@@ -264,4 +263,8 @@ public class ContactInfo {
     return this;
   }
 
+  public ContactInfo inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
 }

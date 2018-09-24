@@ -21,8 +21,7 @@ public class ContactAddressTest extends TestBase{
               .withFirstName("Sveta").withMiddleName("Petrovna").withSecondName("Foqstand")
               .withAddress("Spb"+"\n"+"Petrovka 38"+"\n"+"kv 76")
               .withHomePhone("+(8911)00019").withMobilePhone("+516-4575-6").withWorkPhone("3456 354")
-              .withEmail1("test@inbox.ru").withEmail2("test2@mail.ru").withEmail3("@gh.db")
-              .withGroup("test_group"), true);
+              .withEmail1("test@inbox.ru").withEmail2("test2@mail.ru").withEmail3("@gh.db"), true);
     }
   }
 
