@@ -6,11 +6,19 @@ import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 import ru.testing_education.addressbook.appmanager.ApplicationManager;
+import ru.testing_education.addressbook.model.ContactInfo;
+import ru.testing_education.addressbook.model.Contacts;
+import ru.testing_education.addressbook.model.GroupData;
+import ru.testing_education.addressbook.model.Groups;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestBase {
 
@@ -48,6 +56,33 @@ public class TestBase {
   @AfterMethod (alwaysRun = true)
   public void logTestStop(Method method) {
     logger.info("Start test "+method.getName());
+  }
+
+
+
+  public void verifyGroupListInUI() {
+    if (Boolean.getBoolean("verifyUI")) {
+      Groups dbGroup = app.db().groups();
+      Groups uiGroup = app.group().all();
+      assertThat(uiGroup, equalTo(dbGroup.stream()
+              .map((g) -> new GroupData().withGroupId(g.getGroupId()).withGroupName(g.getGroupName()))
+              .collect(Collectors.toSet())));
+    }
+  }
+
+
+  public void verifyContactListUI() {
+    if (Boolean.getBoolean("verifyUI")) {
+      Contacts dbContact = app.db().contacts();
+      Contacts uiContact = app.contact().all();
+      assertThat(
+              uiContact.stream().map((c)-> new ContactInfo().withId(c.getId())
+                      .withFirstName(c.getFirstName()).withSecondName(c.getSecondName())
+                      .withAddress(c.getAddress())).collect(Collectors.toSet()),
+              equalTo(dbContact.stream().map((c)-> new ContactInfo().withId(c.getId())
+                      .withFirstName(c.getFirstName()).withSecondName(c.getSecondName())
+                      .withAddress(c.getAddress())).collect(Collectors.toSet())));
+    }
   }
 
 }
