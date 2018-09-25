@@ -1,5 +1,7 @@
 package ru.testing_education.addressbook.tests;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.testing_education.addressbook.model.ContactInfo;
@@ -8,13 +10,14 @@ import ru.testing_education.addressbook.model.GroupData;
 import ru.testing_education.addressbook.model.Groups;
 
 import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactAddingToGroup extends TestBase {
+public class ContactAddingToGroupTest extends TestBase {
+
+
+  Logger logger = LoggerFactory.getLogger(ContactAddingToGroupTest.class);
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -31,7 +34,9 @@ public class ContactAddingToGroup extends TestBase {
 
     for (ContactInfo contact : contacts) {
       if (contact.getGroups().size() == groups.size()) {
-        app.group().create(new GroupData().withGroupName("additional_group"));
+        Random random = new Random();
+        app.goTo().page("groups");
+        app.group().create(new GroupData().withGroupName("additional_group " +random.nextInt()));
       }
     }
   }
@@ -41,11 +46,8 @@ public class ContactAddingToGroup extends TestBase {
   public void testAddingContactToGroup() {
 
     GroupData toGroup = app.db().groups().iterator().next();
-    app.goTo().homePage("home");
-    app.contact().selectByGroup(toGroup);
-    Contacts contactListForChoosenGroupBefore = app.contact().all();
-    Contacts before = app.db().contacts();
-    ContactInfo addedContact = before.iterator().next();
+    ContactInfo addedContact = app.db().contacts().iterator().next();
+    Contacts contactListForChoosenGroupBefore = toGroup.getContacts();
 
     if (contactListForChoosenGroupBefore.contains(addedContact)) {
 
@@ -56,16 +58,19 @@ public class ContactAddingToGroup extends TestBase {
 
       addedContact = app.db().contacts().stream()
               .filter(c -> c.getFirstName().equals(newAddedContact.getFirstName()))
+            //  &&c.getId()==newAddedContact.getId())
               .findFirst()
               .get();
     }
 
     app.goTo().homePage("home");
+    System.out.println("Adding of  contact=" + addedContact.getFirstName() + " to group = " + toGroup.getGroupName());
+
     app.contact().addToGroup(addedContact, toGroup);
 
-    app.goTo().homePage("home");
-    app.contact().selectByGroup(toGroup);
-    Contacts contactListForChoosenGroupAfter = app.contact().all();
+    Contacts contactListForChoosenGroupAfter = app.db().groups().stream()
+            .filter(g -> g.getGroupId() == toGroup.getGroupId())
+            .findFirst().get().getContacts();
 
     assertThat(contactListForChoosenGroupAfter, equalTo(contactListForChoosenGroupBefore.withAdded(addedContact)));
     verifyContactListUI();

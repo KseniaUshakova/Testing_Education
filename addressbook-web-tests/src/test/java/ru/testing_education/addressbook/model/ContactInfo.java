@@ -64,7 +64,8 @@ public class ContactInfo {
 
   @ManyToMany (fetch = FetchType.EAGER)
   @JoinTable(name="address_in_groups",
-          joinColumns = @JoinColumn(name="id"), inverseJoinColumns = @JoinColumn(name="group_id"))
+          joinColumns = @JoinColumn(name="id"),
+          inverseJoinColumns = @JoinColumn(name="group_id"))
   private Set<GroupData> groups = new HashSet<GroupData>();
 
   @PostLoad

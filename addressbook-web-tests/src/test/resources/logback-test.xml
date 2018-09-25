@@ -16,6 +16,10 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+
 
         <file>test-${bySecond}.log</file>
         <!-- set immediateFlush to false for much higher logging throughput -->

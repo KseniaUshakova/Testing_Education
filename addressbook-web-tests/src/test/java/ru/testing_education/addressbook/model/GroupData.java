@@ -3,6 +3,7 @@ package ru.testing_education.addressbook.model;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -45,7 +46,9 @@ public class GroupData {
   @Type(type = "text")
   private String groupFooter;
 
-  @ManyToMany (mappedBy = "groups")
+
+  @ManyToMany (mappedBy = "groups",fetch = FetchType.EAGER)
+  @Where(clause = "deprecated='0000-00-00'")
   private Set<ContactInfo> contacts = new HashSet<ContactInfo>();
 
 

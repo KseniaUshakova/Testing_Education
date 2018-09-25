@@ -228,4 +228,20 @@ public class ContactHelper extends HelperBase {
             .selectByVisibleText(toGroup.getGroupName());
 
   }
+
+  public void deleteFromGroup(ContactInfo deletedContact, GroupData fromGroup) {
+
+
+    selectByGroup(fromGroup);
+    selectContactById(deletedContact.getId());
+    deleteContactFromGroup();
+    contactCache = null;
+
+  }
+
+  public void deleteContactFromGroup() {
+
+    wd.findElement(By.cssSelector("input[name='remove']")).click();
+
+  }
 }

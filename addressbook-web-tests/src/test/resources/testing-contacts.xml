@@ -9,7 +9,8 @@
             <class name="ru.testing_education.addressbook.tests.ContactEmailsTest" />
             <class name="ru.testing_education.addressbook.tests.ContactPhonesTest" />
             <class name="ru.testing_education.addressbook.tests.ContactDeletionTest" />
-
+            <class name="ru.testing_education.addressbook.tests.ContactAddingToGroupTest" />
+            <class name="ru.testing_education.addressbook.tests.ContactDeletionFromGroupTest" />
         </classes>
     </test>
 
