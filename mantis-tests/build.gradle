@@ -1,0 +1,37 @@
+import com.sun.javafx.runtime.SystemProperties
+
+apply plugin: 'java'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies{
+    compile 'org.testng:testng:6.9.10'
+    compile 'org.seleniumhq.selenium:selenium-java:3.14.0'
+    compile 'org.hamcrest:java-hamcrest:2.0.0.0'
+
+}
+
+test {
+
+    useTestNG {
+        suites 'src/test/resources/testing.xml'
+
+        if (projects.hasProperty('browser')) {
+            systemProperty 'browser', "${browser}"
+        }
+
+        if (projects.hasProperty('targer')) {
+            systemProperty 'target', "${target}"
+        }
+
+        if (projects.hasProperty('verifyUI')) {
+            systemProperty 'verifyUI', "${verifyUI}"
+        }
+
+    }
+}
+
+
